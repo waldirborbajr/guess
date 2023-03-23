@@ -16,7 +16,11 @@ fn main() {
             .read_line(&mut gmn)
             .expect("Error reading number");
 
-        let gmn: u32 = gmn.trim().parse().expect("Type a number");
+        // let gmn: u32 = gmn.trim().parse().expect("Type a number");
+        let gmn: u32 = match gmn.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         println!("You type: {}", gmn);
 
