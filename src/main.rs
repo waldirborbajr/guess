@@ -1,4 +1,4 @@
-use std::{io, cmp::Ordering};
+use std::{cmp::Ordering, io};
 
 use rand::Rng;
 
@@ -7,19 +7,26 @@ fn main() {
 
     println!("GMN - Guess My Number");
 
-    println!("Type a number");
+    loop {
+        println!("Type a number");
 
-    let mut gmn = String::new();
+        let mut gmn = String::new();
 
-    io::stdin().read_line(&mut gmn).expect("Error reading number");
+        io::stdin()
+            .read_line(&mut gmn)
+            .expect("Error reading number");
 
-    let gmn: u32 = gmn.trim().parse().expect("Type a number");
+        let gmn: u32 = gmn.trim().parse().expect("Type a number");
 
-    println!("You type: {}", gmn);
+        println!("You type: {}", gmn);
 
-    match gmn.cmp(&secgnm) {
-        Ordering::Less => println!("Too low"),
-        Ordering::Greater => println!("Too high"),
-        Ordering::Equal => println!("Gotcha"),
+        match gmn.cmp(&secgnm) {
+            Ordering::Less => println!("Too low"),
+            Ordering::Greater => println!("Too high"),
+            Ordering::Equal => {
+                println!("Gotcha");
+                break;
+            }
+        }
     }
 }
